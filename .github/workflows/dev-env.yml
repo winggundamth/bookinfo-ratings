@@ -10,3 +10,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: docker build -t ghcr.io/winggundamth/bookinfo-ratings:dev .
       - run: docker images
+      - run: docker push ghcr.io/[GITHUB_USER]/bookinfo-ratings:dev
