@@ -1,10 +1,15 @@
 name: dev-env
+
 on:
   push:
     branches:
       - 'dev'
+
+permissions:
+  packages: write
+
 jobs:
-  build-docker-image:
+  build-and-push-docker-image:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
