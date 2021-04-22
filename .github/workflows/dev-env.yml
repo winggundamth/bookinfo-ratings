@@ -8,5 +8,5 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: docker build -t ghcr.io/winggundamth/bookinfo-ratings:dev
+      - run: docker build -t ghcr.io/winggundamth/bookinfo-ratings:dev .
       - run: docker images
