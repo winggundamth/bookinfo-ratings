@@ -4,7 +4,7 @@ on:
     branches:
       - 'dev'
 jobs:
-  build-push-docker-image:
+  deploy-dev:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
