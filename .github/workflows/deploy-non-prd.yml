@@ -8,12 +8,9 @@ jobs:
   deploy-non-prd:
     runs-on: ubuntu-20.04
     env:
-      if: github.ref == 'refs/heads/master'
-      ENV_NAME: uat
-      if: github.ref != 'refs/heads/master'
-      ENV_NAME: ${GITHUB_REF##*/}
+      ENV_NAME: $( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo 'master' )
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - run: echo $GITHUB_REF
+      - run: echo $GITHUB_REF ${GITHUB_REF##*/}
       - run: echo $ENV_NAME
