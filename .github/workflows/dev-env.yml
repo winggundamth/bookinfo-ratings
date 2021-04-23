@@ -20,11 +20,6 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ github.actor }}/bookinfo-ratings:dev
-  deploy-dev:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
       - name: get-credentials
         uses: google-github-actions/get-gke-credentials@main
         with:
@@ -34,6 +29,7 @@ jobs:
       - name: deploy
         uses: deliverybot/helm@v1
         with:
+          helm: helm3
           release: bookinfo-dev-ratings
           namespace: student169-bookinfo-dev
           chart: k8s/helm
