@@ -34,5 +34,5 @@ jobs:
           namespace: student169-bookinfo-dev
           chart: k8s/helm
           value-files: k8s/helm-values/values-bookinfo-dev-ratings.yaml
-          values:
+          values: |
             COMMIT_SHA: $GITHUB_SHA
