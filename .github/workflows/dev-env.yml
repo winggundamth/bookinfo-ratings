@@ -6,9 +6,12 @@ on:
 jobs:
   build-push-docker-image:
     runs-on: ubuntu-20.04
+    permissions:
+      packages: write
+      contents: read
     steps:
       - uses: actions/checkout@v2
       - run: docker build -t ghcr.io/winggundamth/bookinfo-ratings:dev .
       - run: docker images
-      - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - run: echo ${{ secrets.GITHUB_TOKEN  }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - run: docker push ghcr.io/winggundamth/bookinfo-ratings:dev
