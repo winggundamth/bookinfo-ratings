@@ -2,7 +2,7 @@ name: uat-env
 on:
   push:
     branches:
-      - uat
+      - master
 jobs:
   deploy-uat:
     runs-on: ubuntu-20.04
