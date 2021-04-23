@@ -7,10 +7,9 @@ on:
 jobs:
   deploy-non-prd:
     runs-on: ubuntu-20.04
-    env:
-      ENV_NAME: $( [ "$GITHUB_REF" == "refs/heads/master" ] && echo 'uat' || echo 'master' )
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - run: echo $GITHUB_REF ${GITHUB_REF##*/}
+      - name: Set env
+        run: echo "ENV_NAME=$( [ "$GITHUB_REF" == "refs/heads/master" ] && 'uat' || ${GITHUB_REF##*/} )" >> $GITHUB_ENV
       - run: echo $ENV_NAME
