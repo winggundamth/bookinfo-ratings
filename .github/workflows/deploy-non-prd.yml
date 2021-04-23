@@ -7,11 +7,10 @@ on:
 jobs:
   deploy-non-prd:
     runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/master'
     env:
+      if: github.ref == 'refs/heads/master'
       ENV_NAME: uat
-    if: github.ref != 'refs/heads/master'
-    env:
+      if: github.ref != 'refs/heads/master'
       ENV_NAME: ${GITHUB_REF##*/}
     steps:
       - name: Checkout code
