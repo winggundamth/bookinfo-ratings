@@ -39,6 +39,7 @@ jobs:
       - name: Test health check page
         uses: 3sky/glowing-spoon@v0.0.1
         with:
-          hostname: 'bookinfo.dev.opsta.net'
-          path: '/student169/ratings/health'
-          expected: 'working'
+          hostname: bookinfo.uat.opsta.net
+          path: /student169/ratings/health
+          filter: .status
+          expected: Ratings is working
