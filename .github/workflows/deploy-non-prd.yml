@@ -8,7 +8,7 @@ jobs:
   deploy-non-prd:
     runs-on: ubuntu-20.04
     env:
-      ENV_NAME: "${{ $GITHUB_REF == 'refs/heads/master' && 'uat' || ${GITHUB_REF##*/} }}"
+      ENV_NAME: "${{ github.ref == 'refs/heads/master' && 'uat' || ${GITHUB_REF##*/} }}"
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

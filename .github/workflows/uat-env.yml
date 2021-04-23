@@ -37,9 +37,4 @@ jobs:
           values: |
             COMMIT_SHA: $GITHUB_SHA
       - name: Test health check page
-        uses: 3sky/glowing-spoon@v0.0.1
-        with:
-          hostname: bookinfo.uat.opsta.net
-          path: /student169/ratings/health
-          filter: .status
-          expected: Ratings is working
+        run: curl http://bookinfo.uat.opsta.net/student169/ratings/health | grep 'Ratings is working'
