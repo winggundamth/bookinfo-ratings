@@ -13,10 +13,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Git tagging
         id: git-tag
-        uses: ChloePlanet/github-tag-action@2.0.0
+        uses: opsta/github-tag-action@2.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           CUSTOM_TAG: ${{ github.event.inputs.tag_version }}
+          DEFAULT_BUMP_VERSION: patch
       - name: Docker tagging
         run: echo ${{ steps.git-tag.outputs.new_tag }}
