@@ -5,7 +5,7 @@ on:
       - dev
       - master
 jobs:
-  deploy-non-prd:
+  build:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
@@ -25,6 +25,9 @@ jobs:
         with:
           push: true
           tags: ghcr.io/winggundamth/bookinfo-ratings:${{ env.ENV_NAME }}
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
       - name: get-credentials
         uses: google-github-actions/get-gke-credentials@main
         with:
