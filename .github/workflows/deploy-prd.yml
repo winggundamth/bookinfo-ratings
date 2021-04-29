@@ -28,8 +28,7 @@ jobs:
           chart: k8s/helm
           value-files: k8s/helm-values/values-bookinfo-prd-ratings.yaml
           values: |
-            ratings.tag: "${{ github.event.inputs.deploy-version }}"
-            extraEnv.COMMIT_SHA: "${{ github.sha }}"
+            ratings.tag: ${{ github.event.inputs.deploy-version }}
   acceptance-test:
     needs: deploy-prd
     runs-on: ubuntu-20.04
