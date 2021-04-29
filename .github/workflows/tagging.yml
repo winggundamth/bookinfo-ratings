@@ -1,5 +1,5 @@
 name: tagging
-on: 
+on:
   workflow_dispatch:
     inputs:
       tag-version:
