@@ -47,6 +47,9 @@ jobs:
           namespace: student169-bookinfo-${{ env.ENV_NAME }}
           chart: k8s/helm
           value-files: k8s/helm-values/values-bookinfo-${{ env.ENV_NAME }}-ratings.yaml
+          values: |
+            extraEnv:
+              COMMIT_SHA: ${{ github.sha }}
   acceptance-test:
     needs: deploy
     runs-on: ubuntu-20.04
