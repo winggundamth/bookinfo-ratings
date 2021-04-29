@@ -2,7 +2,7 @@ name: tagging
 on: 
   workflow_dispatch:
     inputs:
-      tag_version:
+      tag-version:
         description: 'Version to tag'
         required: false
 jobs:
@@ -16,8 +16,10 @@ jobs:
         uses: anothrNick/github-tag-action@1.35.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CUSTOM_TAG: ${{ github.event.inputs.tag_version }}
+          CUSTOM_TAG: ${{ github.event.inputs.tag-version }}
           DEFAULT_BUMP: patch
+    outputs:
+      tag-version: ${{ steps.git-tag.outputs.new_tag }}
   docker-tag:
     needs: git-tag
     runs-on: ubuntu-20.04
@@ -33,4 +35,4 @@ jobs:
         with:
           src: ghcr.io/winggundamth/bookinfo-ratings:uat
           dst: |
-            ghcr.io/winggundamth/bookinfo-ratings:${{ steps.git-tag.outputs.new_tag }}
+            ghcr.io/winggundamth/bookinfo-ratings:${{needs.git-tag.outputs.tag-version}}
