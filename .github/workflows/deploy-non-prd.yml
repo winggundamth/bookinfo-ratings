@@ -26,8 +26,11 @@ jobs:
           push: true
           tags: ghcr.io/winggundamth/bookinfo-ratings:${{ env.ENV_NAME }}
   deploy:
+    needs: build
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: get-credentials
         uses: google-github-actions/get-gke-credentials@main
         with:
@@ -42,5 +45,9 @@ jobs:
           namespace: student169-bookinfo-${{ env.ENV_NAME }}
           chart: k8s/helm
           value-files: k8s/helm-values/values-bookinfo-${{ env.ENV_NAME }}-ratings.yaml
+  acceptance-test:
+    needs: deploy
+    runs-on: ubuntu-20.04
+    steps:
       - name: Acceptance test
         run: curl http://bookinfo.${{ env.ENV_NAME }}.opsta.net/student169/ratings/health | grep "Ratings is healthy"
